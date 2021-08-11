@@ -36,7 +36,7 @@ export default function InputComponent({toDisplay, setToDisplay, setShowDownload
         className="appearance-none rounded-none  block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
         onChange={handleChange}
       />
-      {toDisplay.length ? null : (<span  className='text-gray-500'>Enter planets names ('comma(',') separated'). ex: Earth, Mercury, Mars, Venus, Saturn (Case Insensitive)</span>)} 
+      {toDisplay.length ? null : (<span  className='text-gray-500'>Enter planets names (&apos;comma(&apos;,&apos;) separated&apos;). ex: Earth, Mercury, Mars, Venus, Saturn (Case Insensitive)</span>)} 
       </div>
       <button
         type="button"
