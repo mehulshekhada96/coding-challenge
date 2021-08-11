@@ -5,6 +5,7 @@ import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
 export default function Home() {
   const [toDisplay, setToDisplay] = useState([]);
   const [content, setContent] = useState();
+  const [showDownloadButton, setShowDownloadButton] = useState(false);
   function handleOnDragEnd(result) {
     if (!result.destination) return;
 
@@ -33,7 +34,7 @@ export default function Home() {
     const blob = new Blob([fileData], { type: "text/html" });
     const url = URL.createObjectURL(blob);
     const link = document.createElement("a");
-    link.download = `export-${(new Date()).toUTCString()}.html`;
+    link.download = `export-${new Date().toLocaleString()}.html`;
     link.href = url;
     link.click();
   };
@@ -41,10 +42,12 @@ export default function Home() {
     const htmlContent = document.body.innerHTML;
     // console.log(htmlContent);
     setContent(htmlContent);
+
+    
   });
   return (
     <div className="container max-w-5xl mx-auto px-4 sm:px-6 ">
-      <InputComponent setToDisplay={setToDisplay} />
+      <InputComponent setToDisplay={setToDisplay} toDisplay={toDisplay} setShowDownloadButton={setShowDownloadButton}/>
       <DragDropContext onDragEnd={handleOnDragEnd}>
         <Droppable droppableId="planets">
           {(provided) => (
@@ -55,13 +58,15 @@ export default function Home() {
           )}
         </Droppable>
       </DragDropContext>
-      <button
-        type="button"
-        className="group  relative  max-w-lg mx-auto flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-        onClick={handleSaveToPC}
-      >
-        Download this File
-      </button>
+      {toDisplay.length ? (
+        <button
+          type="button"
+          className="group  relative  max-w-lg mx-auto flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+          onClick={handleSaveToPC}
+        >
+          Download this File
+        </button>
+      ) : null}
     </div>
   );
 }
