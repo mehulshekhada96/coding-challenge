@@ -44,7 +44,7 @@ export default function Home() {
     setContent(htmlContent);
 
     
-  },[]);
+  },[displayPlanets]);
   return (
     <div className="container max-w-5xl mx-auto px-4 sm:px-6 ">
       <InputComponent setToDisplay={setToDisplay} toDisplay={toDisplay} setShowDownloadButton={setShowDownloadButton}/>
